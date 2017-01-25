@@ -1,8 +1,8 @@
 <?php
 
 // Auth
-$user = App\User::find(1);
-Auth::login($user);
+//$user = App\User::find(1);
+//Auth::login($user);
 
 Route::get('/', function () {
     return view('welcome');

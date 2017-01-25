@@ -31,4 +31,17 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Snippet::class, 'user_like_snippet', 'user_id', 'snippet_id');
     }
+
+    public function snippets()
+    {
+        return $this->hasMany(Snippet::class);
+    }
+
+    public function likedBy()
+    {
+        $snippetsByUser = $this->snippets->pluck('id')->all();
+        $count = \DB::table('user_like_snippet')->whereIn('snippet_id', $snippetsByUser)->count();
+
+        return $count;
+    }
 }

@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Snippet;
+use App\User;
 
 class SnippetsController extends Controller
 {
     public function index()
     {
         $snippets = Snippet::latest()->get();
+        $users = User::all();
 
-        return view('snippets.index', compact('snippets'));
+        return view('snippets.index', compact('snippets', 'users'));
     }
 
     public function create(Snippet $snippet)
