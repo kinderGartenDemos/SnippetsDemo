@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function likes()
+    {
+        return $this->belongsToMany(Snippet::class, 'user_like_snippet', 'user_id', 'snippet_id');
+    }
 }

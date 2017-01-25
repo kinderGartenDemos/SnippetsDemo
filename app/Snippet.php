@@ -27,4 +27,14 @@ class Snippet extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function likedBy()
+    {
+        return $this->belongsToMany(User::class, 'user_like_snippet', 'snippet_id', 'user_id');
+    }
+
+    public function countLikes()
+    {
+        return $this->likedBy()->count();
+    }
 }

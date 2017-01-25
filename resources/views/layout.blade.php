@@ -24,6 +24,10 @@
             .flex {
                 flex: 1;
             }
+
+            .like-snippet {
+                margin-right: 20px;
+            }
         </style>
     </head>
     <body>

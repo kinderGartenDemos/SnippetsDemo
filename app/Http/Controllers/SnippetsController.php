@@ -41,4 +41,28 @@ class SnippetsController extends Controller
 
         return redirect()->route('snippets-home');
     }
+
+    public function like(Snippet $snippet)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->back();
+        }
+
+        $user->likes()->syncWithoutDetaching([$snippet->id]);
+
+        return redirect()->back();
+    }
+
+    public function dislike(Snippet $snippet)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->back();
+        }
+
+        $user->likes()->detach([$snippet->id]);
+
+        return redirect()->back();
+    }
 }
