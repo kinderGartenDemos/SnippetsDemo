@@ -5,6 +5,9 @@
 		<div class="is-flex">
 			<h3 class="title is-3 flex">
 				{{ $snippet->title }}
+				@if ($snippet->user_id)
+					<small>by {{ $snippet->user->name }}</small>
+				@endif
 			</h3>
 
 			<a href="/snippets/{{ $snippet->id }}/fork">Fork Me</a>
@@ -23,6 +26,9 @@
 			<a href="/snippets/{{ $snippet->original->id }}">
 				{{ $snippet->original->title }}
 			</a>
+			@if ($snippet->original->user_id)
+				by {{ $snippet->original->user->name }}
+			@endif
 		</h3>
 	@endif
 
@@ -31,9 +37,14 @@
 		<h3 class="title is-3">it has forks</h3>
 		<ul>
 			@foreach($snippet->forks as $fork)
-				<a href="/snippets/{{ $fork->id }}">
-					{{ $fork->title }}
-				</a>
+				<li>
+					<a href="/snippets/{{ $fork->id }}">
+						{{ $fork->title }}
+					</a>
+					@if ($fork->user_id)
+						by {{ $fork->user->name }}
+					@endif
+				</li>
 			@endforeach
 		</ul>
 	@endif

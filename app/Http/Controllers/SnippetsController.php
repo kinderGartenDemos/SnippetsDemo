@@ -30,11 +30,13 @@ class SnippetsController extends Controller
             'title' => 'required',
             'body' => 'required',
         ]);
-
+        $user = auth()->user();
+        $userId = $user ? $user->id : null;
         Snippet::create([
             'title' => request('title'),
             'body' => request('body'),
             'forked_id' => request('forked_id'),
+            'user_id' => $userId,
         ]);
 
         return redirect()->route('snippets-home');

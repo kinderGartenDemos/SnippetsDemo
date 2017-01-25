@@ -18,6 +18,7 @@ class CreateSnippetsTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->integer('forked_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

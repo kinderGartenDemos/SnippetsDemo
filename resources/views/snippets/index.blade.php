@@ -9,7 +9,11 @@
 						<a href="/snippets/{{ $snippet->id }}">
 							{{ $snippet->title }}
 						</a>
+						@if ($snippet->user_id)
+							<small>by {{ $snippet->user->name }}</small>
+						@endif
 					</h3>
+
 					<a href="/snippets/{{ $snippet->id }}/fork">Fork Me</a>
 				</div>
 				<pre>
