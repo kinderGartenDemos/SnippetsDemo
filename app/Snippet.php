@@ -18,11 +18,6 @@ class Snippet extends Model
         return $this->belongsTo(Snippet::class, 'forked_id');
     }
 
-    public function isForked()
-    {
-        return !! $this->forked_id;
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -33,13 +28,18 @@ class Snippet extends Model
         return $this->belongsToMany(User::class, 'user_like_snippet', 'snippet_id', 'user_id');
     }
 
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
+
     public function countLikes()
     {
         return $this->likedBy()->count();
     }
 
-    public function language()
+    public function isForked()
     {
-        return $this->belongsTo(Language::class);
+        return !! $this->forked_id;
     }
 }
