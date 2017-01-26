@@ -21,6 +21,24 @@
 		    <textarea id="body" name="body" class="textarea">{{ $snippet->body }}</textarea>
 		</div>
 		
+		@if ($languages)
+			<div class="control">
+			    <label for="language" class="label">Language:</label>
+				<span class="select">
+					<select name="language_id">
+						<option value="">none</option>
+						@foreach ($languages as $language)
+							<option value="{{ $language->id }}"
+									@if ($language->id == $snippet->language->id) selected="selected" @endif 
+							>
+								{{ $language->name }}
+							</option>
+						@endforeach
+					</select>
+				</span>
+			</div>
+		@endif
+		
 		<div class="control">
 		    <button class="button is-primary">publish snippets</button>
 		</div>

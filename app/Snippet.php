@@ -37,4 +37,9 @@ class Snippet extends Model
     {
         return $this->likedBy()->count();
     }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
 }

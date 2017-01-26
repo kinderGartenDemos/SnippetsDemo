@@ -5,20 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Snippet;
 use App\User;
+use App\Language;
 
 class SnippetsController extends Controller
 {
-    public function index()
+    public function index(Language $language)
     {
-        $snippets = Snippet::latest()->get();
+        if ($language->id) {
+            $snippets = Snippet::where('language_id', $language->id)->latest()->get();
+        } else {
+            $snippets = Snippet::latest()->get();
+        }
+        
         $users = User::all();
+        $languages = Language::all();
 
-        return view('snippets.index', compact('snippets', 'users'));
+        return view('snippets.index', compact('snippets', 'users', 'languages'));
     }
 
     public function create(Snippet $snippet)
     {
-        return view('snippets.create', compact('snippet'));
+        $languages = Language::all();
+
+        return view('snippets.create', compact('snippet', 'languages'));
     }
 
     public function show(Snippet $snippet)
@@ -39,6 +48,7 @@ class SnippetsController extends Controller
             'body' => request('body'),
             'forked_id' => request('forked_id'),
             'user_id' => $userId,
+            'language_id' => request('language_id'),
         ]);
 
         return redirect()->route('snippets-home');

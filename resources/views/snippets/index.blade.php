@@ -37,7 +37,7 @@
 				<p>there's no snippets yet</p>
 			@endif
 		</div>
-		<div class="column is-offset-1">
+		<div class="column is-3 is-offset-1">
 			<div class="message is-primary">
 				<div class="message-header">
 					<p>all users</p>
@@ -52,6 +52,26 @@
 					</ul>
 				</div>
 			</div>
+			
+			@if ($languages)
+				<div class="message is-info">
+					<div class="message-header">
+						<p>all languages</p>
+					</div>
+					<div class="message-body">
+						<ul>
+							@foreach ($languages as $language)
+								<li>
+									<a href="/snippets/language/{{ $language->id}}">
+										{{ $language->name }} 
+									</a>
+									<small>{{ $language->snippets->count() }}</small>
+								</li>
+							@endforeach
+						</ul>
+					</div>
+				</div>
+			@endif
 		</div>
 	</div>
 @stop
